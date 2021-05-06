@@ -1,0 +1,140 @@
+.SignScreen {
+  max-width: 100vw;
+  min-height: 100vh;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  color: #51A4AE;
+  justify-content: center;
+  align-items: center;
+  background-repeat: no-repeat;
+  background:radial-gradient(ellipse at center, rgba(255,254,234,1) 0%, rgba(255,254,234,1) 35%, #9f9afc 100%) !important;
+  color: #4944a0;
+}
+.register{
+  text-align: center;
+}
+.SignImg{
+text-align: center;
+}
+.SignImg > img{
+width: 35vw;
+margin: 5% auto;
+}
+.SignRow{
+margin: 4%;
+}  
+.SignForm{
+padding: 8% 12% 10%;
+}
+.SignForm input{
+width: 90%;
+margin-left: 5%;
+padding: 3%;
+background-color: transparent !important;
+border-bottom: 1px solid #4944a0;
+color: #4944a0;
+caret-color: #4944a0;
+}
+.SignForm input::placeholder{
+color: #4944a0;
+}
+.SignForm input:focus{
+border-bottom: 2.5px solid #4944a0;
+}
+.SignForm button{
+background-color: #4944a0;
+margin: 3% auto;
+font-size: 110%;
+border: 1px solid #4944a0;
+}
+.SignForm button:hover{
+background-color: transparent;
+border: 1px solid #4944a0;
+color: #4944a0;
+font-size: 110%;
+}
+.SignFRow{
+margin: 5% auto 3%;
+}
+.SignFRow label{
+font-size: 100%;
+}
+.rounded{
+border-radius: 16px;
+}
+.SignScreen a{ 
+color: #4944a0;
+font-style: italic;
+text-decoration: none;
+}
+.SignScreen a:hover{ 
+color: #4944a0;
+text-decoration: none;
+}
+.SignScreen h2{
+text-align: center;
+margin-top: 2%;
+}
+@media screen and (max-width:850px){
+.SignScreen h2{
+  font-size: 200% !important;
+}
+.SignScreen ul{
+  text-align: center;
+}
+.SignImg > img{
+  width: 65vw;
+  margin: 10%;
+}
+.SignScreen{
+  padding-bottom: 4%;
+}
+.SignForm input{
+  width: 95%;
+}
+.SignForm{
+  padding:10%;
+}
+.SignFRow{
+  margin: 5% 0;
+}
+.SignFRow label{
+  display: inline-block;
+  width: auto;
+  font-size: 105%;
+}
+}
+@media screen and (max-width:450px){
+  .SignFRow label{
+    display: inline-block;
+    width: auto;
+    font-size: 95%;
+  }
+}
+@media screen and (max-width:400px){
+.SignForm input{
+  width: 95%;
+}
+.textF{
+  width: 85%;
+  margin-left: 3%;
+}
+}
+@media screen and (max-width:360px){
+.SignForm input{
+  width: 90%;
+}
+.textF{
+  width: 85%;
+  margin-left: 3%;
+}
+.SignForm a{
+  font-size: 90%;
+}
+.register{
+  font-size: 90%;
+}
+.register a{
+  font-size: 100%;
+}
+}
