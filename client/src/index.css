@@ -38,17 +38,16 @@ body {
 .btn {
   padding: 10px 20px;
   cursor: pointer;
-  width: 100%;
   font-size: 1rem;
   border: none;
 }
 
-.btn:hover {
+/* .btn:hover {
   opacity: 0.8;
-}
+} */
 
 .btn-primary {
-  background-color: coral;
+  /* background-color: coral; */
   color: #fff;
 }
 
@@ -70,4 +69,38 @@ body {
   color: #fff;
   text-align: center;
   margin: 0.5rem 0;
+}
+.signScreen .carousel-control-prev-icon,
+.signScreen .carousel-control-next-icon {
+  height: auto;
+  width: 100px;
+  background-size: 100%, 100%;
+  background-image: none;
+}
+
+.signScreen .carousel-control-next-icon:after
+{
+  content: '⇨';
+  font-size: 55px;
+  color: #6861ca;
+}
+
+.signScreen .carousel-control-prev-icon:after {
+  content: '⇦';
+  font-size: 55px;
+  color: #6861ca;
+}
+.signScreen .carousel-control-next,.signScreen .carousel-control-prev{
+  top:auto;
+  bottom: auto;
+  background-color: transparent;
+  border: 0;
+height: 40px;
+}
+.signScreen .carousel-control-next:hover,.signScreen .carousel-control-prev:hover{
+  color: #3e389b;
+  border: 0;
+}
+.signScreen .carousel .active{
+  height: 42vh !important;
 }

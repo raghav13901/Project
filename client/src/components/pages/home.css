@@ -1,0 +1,164 @@
+.userDetails .col-lg-1{
+    text-align: center;
+  }
+  .userDetails.card-body .col-lg-2{
+    font-size: 6rem;
+    text-align: center;
+  }
+  .home h2{
+      margin: 0;
+  }
+  .navbar input{
+    border-width: 0;
+    border-bottom: 1px solid #fff;
+    background-color: transparent;
+    caret-color: #fff;
+    color : #fff;
+    border-radius: 0;
+  }
+  .navbar input::placeholder{
+    color : #fff;
+  }
+  .navbar input:focus{
+    background-color: transparent;
+    border-bottom-width: 2px; 
+    outline: none;
+    box-shadow: none;
+    border-color: #fff;
+    color: #fff;
+  }
+  .userContent .Details p:last-child{
+    text-transform: none;
+  }
+  .userDetails h2{
+    text-align: justify;
+  }
+  .home .card-body{
+    background-color: #cadefd;
+    text-align: justify;
+    margin: 0;
+    color: #084298;
+    border-color: #cadefd;
+  }
+  .userDetails{
+    border-bottom-right-radius: 16px;
+    border-bottom-left-radius: 16px;
+  }
+  .home .containerL{
+      width: 95%;
+      max-width: 100% !important;
+      margin: 2.5%;
+  }
+  .home .rounded{
+      border-radius: 16px !important;
+  }
+  .home .card-header{
+      background-color: #0d6efd;
+      color: #fff;
+      border-color: #0d6efd;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+  }
+  .home .card{
+    box-shadow: 2px 2px 20px -6px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 2px 2px 20px -6px rgba(0,0,0,0.75);
+  -moz-box-shadow: 2px 2px 20px -6px rgba(0,0,0,0.75);
+  }
+  .home .iRow input{
+    width: 90%;
+    margin: 1% 5%;
+    background-color: transparent;
+    border-width: 0;
+    border-bottom: 1px solid ;
+    border-color: #084298;
+    padding-left: 2%;
+    caret-color: #084298;
+    color: #084298;
+  }
+  .home .iRow input::placeholder{
+    color: #084298;
+  }
+  input:focus{
+    outline: none;
+    border-bottom-width: 2px !important;
+  }
+  ul.list-group{
+    color: #084298;
+    border-bottom-left-radius:16px !important;
+    border-bottom-right-radius:16px !important;
+  }
+  .container.iRow{
+    max-width: 100%;
+    margin: 1.5% 0;
+  }
+  .home .bRow{
+    width: 100%;
+  }
+  .home .bRow button{
+    width: 100%;
+    font-size: 125%;
+  }
+  .row .fc{
+    padding-right: 0;
+    border-radius: 0;
+    border-bottom-left-radius: 16px;
+  }
+  .fc button{
+    border-color:transparent ;
+    border-radius: 0;
+    border-bottom-left-radius: 16px;
+  }
+  .row .lc{
+    border-radius: 0;
+    border-bottom-right-radius: 16px;
+    padding-left: 0;
+  }
+  .lc button:hover,.fc button:hover{
+    border-color:transparent ;
+  } 
+  .lc button{
+    border-color:transparent ;
+    border-radius: 0;
+    border-bottom-right-radius: 16px;
+  }
+  .home li:last-child{
+    border-bottom-left-radius:16px ;
+    border-bottom-right-radius:16px ;
+  }
+  .home button:focus{
+    outline: 0;
+  }
+  li .card-body{
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+  }
+  .list-group-item {
+    border: none !important;
+  }
+  .containerL li{
+    margin: 1% 0;
+  }
+  ul h4{
+    height: 100%;
+    padding: 2%;
+    background-color: #cadefd;
+    margin-bottom: 0.05%;
+    border-bottom-left-radius:16px ;
+    border-bottom-right-radius:16px ;
+  }
+  .indexRow > .card-body{
+    width: 100%;
+    border-radius: 0 !important;
+    background-color: #0d6efd;
+      color: #fff;
+      border-color: #0d6efd;
+  }
+  .containerL ul li:first-child{
+    margin: 0;
+    padding: 0;
+    border-color: #0d6efd;
+  }
+  .indexRow.card{
+    box-shadow: none;
+    border: none;
+  }

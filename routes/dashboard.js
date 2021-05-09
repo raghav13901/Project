@@ -25,7 +25,8 @@ const StoreSchema = new mongoose.Schema({
 
 let storage;
 router.post("/getTableName/:query",async (req,res)=>{
-    storage = mongoose.model(req.body.dbName+"es", StoreSchema);
+  console.log('Hello2');
+  storage = mongoose.model(req.body.dbName+"es", StoreSchema);
     await storage.create({
         name:"123",
         price:-1,
@@ -35,9 +36,11 @@ router.post("/getTableName/:query",async (req,res)=>{
     await storage.deleteMany({price:-1});
     // console.log(await storage.find());
     const a = req.params.query.toLowerCase();
+    console.log(a);
     res.send(await storage.find({name: { "$regex": a , "$options": "i" } }))
 });
 router.post("/getTable",async (req,res)=>{
+  console.log('Hello');
   storage = mongoose.model(req.body.dbName+"es", StoreSchema);
   await storage.create({
       name:"123",
@@ -50,6 +53,7 @@ router.post("/getTable",async (req,res)=>{
   res.send(await storage.find());
 });
 router.get("/getData/:id",async(req,res)=>{
+  console.log(req.params.id);
   let data = await User.findById(req.params.id);
   console.log(data);
   res.send(data);

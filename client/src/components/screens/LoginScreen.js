@@ -111,11 +111,7 @@ const LoginScreen = ({ history }) => {
                 </div>
               </div>
             </div>
-            
-            <Link to="/forgotpassword">
-              Forgot Password?
-            </Link>
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary" style={{width:"100%"}}>
               Login
             </button>
 
