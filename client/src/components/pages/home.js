@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import "./home.css";
 import axios from "axios";
+import leftI from "../assets/pie-chart.svg";
+import totalI from "../assets/percent.svg";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+
 function Home({ match, history }) {
   console.log(match.params);
   let id = match.params.id;
@@ -17,13 +21,17 @@ function Home({ match, history }) {
   const [sid, setId] = useState(0);
   const [enterD, setEnter] = useState(false);
   const [sQ, setSQ] = useState("");
-  const [salesC,setSaleChange] = useState(false);
+  const [salesC,setSaleChange] = useState(true);
+  const [discP,setDisc] = useState("");
+  const [DP,setDP] = useState(false);
+  const [calcValue,setCalc] = useState("");
   const logOut = () => {
     localStorage.removeItem("table");
     localStorage.removeItem("id");
     localStorage.removeItem("authToken");
     history.push("/login");
   };
+  
   const getData = async () => {
     const udata = await axios.get(`/dashboard/getData/${id}`);
     console.log(udata);
@@ -46,14 +54,18 @@ function Home({ match, history }) {
     let content = idata.data;
     setData(content);
     console.log(content);
-  };
+  };  
   const enter = async (e) => {
     if (name != "" && price != "" && left != "" && total != "") {
       var s = true;
       var i = 0;
       for (let index = 0; index < data.length; index++) {
         const element = data[index];
-        if (element.name.toLowerCase() == name.toLowerCase()) {
+        if ((element.name.toLowerCase()+"s" == name.toLowerCase() ||
+        element.name.toLowerCase()+"es" == name.toLowerCase() ||
+        element.name.toLowerCase() == name.toLowerCase() ||
+        element.name.toLowerCase() == name.toLowerCase()+"s" ||
+        element.name.toLowerCase() == name.toLowerCase()+"es" )) {
           s = false;
           i = index;
           break;
@@ -101,38 +113,80 @@ function Home({ match, history }) {
     for (let index = 0; index < data.length; index++) {
       const element = data[index];
       if (
-        element.name.toLowerCase() == nameC.toLowerCase() &&
-        element._id != sid
-      ) {
+        element._id != sid &&
+        (element.name.toLowerCase()+"s" == nameC.toLowerCase() ||
+        element.name.toLowerCase()+"es" == nameC.toLowerCase() ||
+        element.name.toLowerCase() == nameC.toLowerCase() ||
+        element.name.toLowerCase() == nameC.toLowerCase()+"s" ||
+        element.name.toLowerCase() == nameC.toLowerCase()+"es" )
+      ){
         s = false;
         i = index;
         break;
+      }else{
+        console.log(id,sid);
       }
     }
+    console.log(s);
     console.log(1);
     if (s) {
       console.log(2);
       if (totalC - leftC >= 0) {
         setEnter(!enterD);
-        await axios.post("/dashboard/changeData", {
-          dbName: localStorage.getItem("table"),
-          id: sid,
-          name: nameC,
-          price: priceC,
-          left: leftC,
-          total: totalC,
-        });
-        e.preventDefault();
+        let priceS = priceC;
+        if(DP){
+          priceS = discP;
+        }
+        console.log(calcValue,parseInt(leftC),(calcValue-parseInt(leftC))*priceC);
+        setDP(false);
+        setDisc("");
+        if(calcValue > parseInt(leftC) && salesC){
+            await axios.post(`/dashboard/changeData/${(calcValue-parseInt(leftC))*priceS}/${localStorage.getItem('id')}`, {
+              dbName: localStorage.getItem("table"),
+              id: sid,
+              name: nameC,
+              price: priceC,
+              left: leftC,
+              total: totalC,
+            }).then(
+              (data)=>{
+                console.log(data);
+                if(data.status == 200){
+                  window.location.reload();
+                }
+              }
+            );
+        }else{
+          if(!salesC){
+            console.log(1);
+            await axios.post(`/dashboard/changeData/${undefined}/${undefined}`, {
+              dbName: localStorage.getItem("table"),
+              id: sid,
+              name: nameC,
+              price: priceC,
+              left: leftC,
+              total: totalC,
+            }).then(
+              (data)=>{
+                console.log(data);
+                if(data.status == 200){
+                  window.location.reload();
+                }
+              }
+            );
+          }else{
+            console.log(salesC);
+            alert('Invalid Entry for Sales');
+          }
+        }
       } else {
         console.log(4);
         alert("Item left should be lesser than total items");
-        e.preventDefault();
       }
     } else {
       console.log(5);
       alert(`Duplicate name found at ${i + 1}`);
     }
-    setEnter(!enterD);
   };
   const enterChangeData = (e) => {
     let i = e.target.value;
@@ -140,6 +194,7 @@ function Home({ match, history }) {
     setPriceChange(data[i].price);
     setLeftChange(data[i].left);
     setTotalChange(data[i].total);
+    setCalc(data[i].left);
     setId(data[i]._id);
   };
   useEffect(() => {
@@ -151,7 +206,8 @@ function Home({ match, history }) {
     setTotal("");
   }, [enterD]);
   const item = data.map((i, index) => {
-    return (
+    if(i.price > 0){
+      return (
       <li
         id={i._id}
         style={{ textTransform: "capitalize" }}
@@ -239,11 +295,21 @@ function Home({ match, history }) {
                   value={totalC}
                 />
                 <label htmlFor="addSales">
-                  <input type="checkbox" name="addSales" id="" onChange={(e) => {
+                  <input type="checkbox" name="addSales" id="" checked={salesC} onChange={(e) => {
                     setSaleChange(e.target.checked);
                   }}/>
                   &nbsp;Add to Sales
                 </label>
+                <div>
+                  <label htmlFor="addDP">
+                    <input type="checkbox" name="addDP" id="" onChange={(e) => {
+                      setDP(e.target.checked);
+                    }} disabled={!salesC}
+                    checked={DP}/>
+                    &nbsp;Discount Price
+                  </label>
+                  <input type="number" name="DP" id="" onChange={(e)=>setDisc(e.target.value)} disabled={!DP} value={discP}/>
+                </div>
               </div>
               <div class="modal-footer">
                 <button
@@ -267,6 +333,7 @@ function Home({ match, history }) {
         </div>
       </li>
     );
+    }
   });
   const searchName = () => {
     history.push(`/home/${localStorage.getItem("id")}/${sQ}`);
@@ -276,6 +343,33 @@ function Home({ match, history }) {
     history.push(`/home/${localStorage.getItem("id")}/`);
     window.location.reload();
   };
+  const showC = () => {
+    return(
+      <BarChart
+      width={window.innerWidth*0.98}
+      height={(window.innerWidth > 800)?window.innerHeight:window.innerHeight*0.6}
+      data={ userData.sales}
+      margin={(window.innerWidth > 800)?{
+          top: 5,
+          right: 100,
+          left: 100,
+          bottom: 5,
+      }:{
+          top: 50,
+          right: 10,
+          left: 10,
+          bottom: 5,
+      }}
+    >
+      <CartesianGrid strokeDasharray="3 3" />
+      <XAxis dataKey="name" />
+      <YAxis />
+      <Tooltip />
+      <Legend style={{textTransform:"capitalize"}}/>
+      <Bar dataKey="sale" fill="#084298" />
+    </BarChart>
+    );
+  }
   return (
     <div className="home">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -316,6 +410,14 @@ function Home({ match, history }) {
                 class="nav-item"
                 style={{ cursor: "pointer", marginLeft: "10px" }}
               >
+                <a class="nav-link" href={`/home/${localStorage.getItem("id")}/`}>
+                  Show All
+                </a>
+              </li>
+              <li
+                class="nav-item"
+                style={{ cursor: "pointer", marginLeft: "10px" }}
+              >
                 <a class="nav-link" onClick={logOut}>
                   Log Out
                 </a>
@@ -334,39 +436,37 @@ function Home({ match, history }) {
               <i className="far fa-user"></i>
             </div>
             <div className="col-lg-10">
-              <div className="row">
-                <div className="col-lg-1 col-sm-1">
-                  <h4>
-                    <i className="fas fa-signature"></i>
-                  </h4>
+                <div className="row align-items-center">
+                  <div className="col-lg-1 col-2">
+                    <i className="fas fa-signature fa-lg"></i>
+                  </div>
+                  <div className="col-lg-11 col-10">
+                    {userData.name}
+                  </div>
                 </div>
-                <div className="col-lg-11 col-sm-11">
-                  <h4>{userData.name}</h4>
+                <div className="row align-items-center">
+                  <div className="col-lg-1 col-2">
+                    <i class="fas fa-phone"></i>
+                  </div>
+                  <div className="col-lg-11 col-10">
+                    {userData.phNo}
+                  </div>
                 </div>
-                <div className="col-lg-1 col-sm-1">
-                  <h4>
-                    <i className="fas fa-map-marked"></i>
-                  </h4>
+                <div className="row align-items-center">
+                  <div className="col-lg-1 col-2">
+                    <i class="fas fa-envelope"></i>
+                  </div>
+                  <div className="col-lg-11 col-10">
+                    {userData.email}
+                  </div>
                 </div>
-                <div className="col-lg-11 col-sm-11">
-                  <h4>{userData.address}</h4>
-                </div>
-                <div className="col-lg-1 col-sm-1">
-                  <h4>
-                    <i className="fas fa-phone-alt"></i>
-                  </h4>
-                </div>
-                <div className="col-lg-11 col-sm-11">
-                  <h4>{userData.phNo}</h4>
-                </div>
-                <div className="col-lg-1 col-sm-1">
-                  <h4>
-                    <i className="fas fa-envelope"></i>
-                  </h4>
-                </div>
-                <div className="col-lg-11 col-sm-11">
-                  <h4>{userData.email}</h4>
-                </div>
+                <div className="row align-items-center">
+                  <div className="col-lg-1 col-2">
+                    <i class="fas fa-map-marked-alt"></i>
+                  </div>
+                  <div className="col-lg-11 col-10">
+                    {userData.address}
+                  </div>
               </div>
             </div>
           </div>
@@ -381,85 +481,108 @@ function Home({ match, history }) {
             <div className="container iRow">
               <div className="row">
                 <div className="col-md-6 col-lg-3">
-                  <input
-                    type="text"
-                    value={name}
-                    onChange={(e) => {
-                      setName(e.target.value);
-                    }}
-                    placeholder="Enter Item Name"
-                  />
+                  <div className="container">
+                    <div className="row">
+                      <div className="col-2 text-center">
+                        <i class="fas fa-signature fa-lg enterImg"></i>
+                      </div>
+                      <div className="col-10">
+                        <input
+                          type="text"
+                          value={name}
+                          onChange={(e) => {
+                            setName(e.target.value);
+                          }}
+                          placeholder="Enter Item Name"
+                        />
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div className="col-md-6 col-lg-3">
-                  <input
-                    type="number"
-                    value={price}
-                    onChange={(e) => {
-                      setPrice(e.target.value);
-                    }}
-                    min={0}
-                    placeholder="Enter Item Prices"
-                  />
+                  <div className="container">
+                    <div className="row">
+                      <div className="col-2 text-center">
+                       <i class="fas fa-money-bill-wave fa-lg enterImg"></i>
+                      </div>
+                      <div className="col-10">
+                        <input
+                          type="number"
+                          value={price}
+                          onChange={(e) => {
+                            setPrice(e.target.value);
+                          }}
+                          min={0}
+                          placeholder="Enter Item Prices"
+                        />
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div className="col-md-6 col-lg-3">
-                  <input
-                    type="number"
-                    value={left}
-                    onChange={(e) => {
-                      setLeft(e.target.value);
-                    }}
-                    min={0}
-                    placeholder="Enter Items Left"
-                  />
+                  <div className="container">
+                    <div className="row">
+                      <div className="col-2 text-center">
+                          <img src={leftI} alt="" className="enterImg"/>
+                      </div>
+                      <div className="col-10">
+                        <input
+                          type="number"
+                          value={left}
+                          onChange={(e) => {
+                            setLeft(e.target.value);
+                          }}
+                          min={0}
+                          placeholder="Enter Items Left"
+                        />
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div className="col-md-6 col-lg-3">
-                  <input
-                    type="number"
-                    value={total}
-                    onChange={(e) => {
-                      setTotal(e.target.value);
-                    }}
-                    min={0}
-                    placeholder="Enter Total Items"
-                  />
+                  <div className="container">
+                    <div className="row">
+                      <div className="col-2 text-right">
+                        <img src={totalI} alt="" className="enterImg"/>
+                      </div>
+                      <div className="col-10">
+                        <input
+                          type="number"
+                          value={total}
+                          onChange={(e) => {
+                            setTotal(e.target.value);
+                          }}
+                          min={0}
+                          placeholder="Enter Total Items"
+                        />
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </form>
         </div>
-        <div className="contaner bRow">
-          <div className="row">
-            <div className="col-6 fc">
+        <div className="bRow enter">
               <button type="button" className="btn btn-primary" onClick={enter}>
                 Enter
               </button>
-            </div>
-            <div className="col-6 lc">
-              <button
-                className="btn btn-secondary"
-                type="button"
-                onClick={showAll}
-              >
-                Show All
-              </button>
-            </div>
-          </div>
         </div>
       </div>
       <div class="card  rounded containerL">
         <div class="card-header text-center">
           <h2>Items</h2>
         </div>
-        <ul class="list-group list-group-flush">
+        <ul class="list-group list-group-flush" style={{maxHeight:"85vh",overflowY:"scroll"}}>
           {data.length == 0 ? (
             <h4 className="text-center">
-              No data found for search query '{match.params.query}'
+              {match.params.query == undefined ? ('Please Enter Data'):('No data found for search query '+ match.params.query)}
             </h4>
           ) : (
             <span>
               <li
                 style={{ textTransform: "capitalize" }}
-                className="list-group-item  text-center"
+                className="list-group-item  text-center sticky-top"
               >
                 <div class="card rounded indexRow">
                   <div class="card-body">
@@ -483,6 +606,14 @@ function Home({ match, history }) {
           )}
         </ul>
       </div>
+      <div className="text-center" style={{margin:"5%"}}>
+        <h3>
+          Previous Week Sales - {userData.prevWeekSales}
+        </h3>
+      </div>
+      <h4 className="text-center"style={{marginBottom:"2%"}}>This Week Sales</h4>
+      {showC()}
+      <div className="text-center">Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
     </div>
   );
 }

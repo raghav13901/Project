@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import styles from "./RegisterScreen.module.css";
+import "./RegisterScreen.css";
 import img from "../assets/undraw_authentication_fsn5 (3).svg";
 
 const RegisterScreen = ({ history }) => {
@@ -59,11 +59,11 @@ const RegisterScreen = ({ history }) => {
   };
 
   return (
-    <div className={`${styles.SignScreen} signScreen`}>
+    <div className="SignScreen signScreen">
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
           <a className="navbar-brand" href="#">
-            Navbar
+            SupDB
           </a>
           <button
             className="navbar-toggler"
@@ -79,41 +79,36 @@ const RegisterScreen = ({ history }) => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">
-                  Home
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Link
+                <a className="nav-link" href="/login">
+                  Login
                 </a>
               </li>
             </ul>
           </div>
         </div>
       </nav>
-      <div className={`${styles.SignRow} row align-items-center`}>
-        <div className={`col-lg-8 ${styles.SignImg} text-center`}>
+      <div className="SignRow row align-items-center">
+        <div className="col-lg-8 SignImg text-center">
           <img src={img} alt="Sign In Img" />
         </div>
         <div className="col-lg-4">
           <form
            onSubmit={registerHandler}
-           className={`${styles.SignForm} shadow-lg ${styles.rounded}`}
+           className="SignForm shadow-lg rounded"
           >
             <h2 className="register-screen__title">Register</h2>
             {error && <span className="error-message">{error}</span>}
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
               <div class="carousel-inner">
                 <div class="carousel-item active">
-                <div className={`${styles.SignFRow} form-group`}>
+                <div className="SignFRow form-group">
                     <div className="row align-items-center">
                       <div className="col-1 text-left">
                         <label htmlFor="name">
                           <i className="fas fa-signature fa-lg"></i>
                         </label>
                       </div>
-                      <div className={`col-11 ${styles.textF}`}>
+                      <div className="col-11 textF">
                         <input
                           type="text"
                           required
@@ -125,14 +120,14 @@ const RegisterScreen = ({ history }) => {
                       </div>
                     </div>
                   </div>
-                  <div className={`${styles.SignFRow} form-group`}>
+                  <div className="SignFRow form-group">
                     <div className="row align-items-center">
                       <div className="col-1 text-left">
                         <label htmlFor="email">
                           <i className="fas fa-envelope fa-lg"></i>
                         </label>
                       </div>
-                      <div className={`col-11 ${styles.textF}`}>
+                      <div className="col-11 textF">
                         <input
                           type="email"
                           required
@@ -144,14 +139,14 @@ const RegisterScreen = ({ history }) => {
                       </div>
                     </div>
                   </div>
-                  <div className={`${styles.SignFRow} form-group`}>
+                  <div className="SignFRow form-group">
                     <div className="row align-items-center">
                       <div className="col-1 text-left">
                         <label htmlFor="password">
                           <i className="fas fa-key fa-lg"></i>
                         </label>
                       </div>
-                      <div className={`col-11 ${styles.textF}`}>
+                      <div className="col-11 textF">
                         <input
                           type="password"
                           required
@@ -164,14 +159,14 @@ const RegisterScreen = ({ history }) => {
                       </div>
                     </div>
                   </div>
-                  <div className={`${styles.SignFRow} form-group`}>
+                  <div className="SignFRow form-group">
                     <div className="row align-items-center">
                       <div className="col-1 text-left">
                         <label htmlFor="confirmpassword">
                           <i className="fas fa-check-circle fa-lg"></i>
                         </label>
                       </div>
-                      <div className={`col-11 ${styles.textF}`}>
+                      <div className="col-11 textF">
                         <input
                           type="password"
                           required
@@ -186,14 +181,14 @@ const RegisterScreen = ({ history }) => {
                   </div>
                 </div>
                 <div class="carousel-item">
-                <div className={`${styles.SignFRow} form-group`}>
+                <div className="SignFRow form-group">
                     <div className="row align-items-center">
                       <div className="col-1 text-left">
                         <label htmlFor="password">
                           <i class="fas fa-map-marked-alt fa-lg"></i>
                         </label>
                       </div>
-                      <div className={`col-11 ${styles.textF}`}>
+                      <div className="col-11 textF">
                         <input
                           type="text"
                           required
@@ -206,14 +201,14 @@ const RegisterScreen = ({ history }) => {
                       </div>
                     </div>
                   </div>
-                  <div className={`${styles.SignFRow} form-group`}>
+                  <div className="SignFRow form-group">
                     <div className="row align-items-center">
                       <div className="col-1 text-left">
                         <label htmlFor="password">
                           <i class="fas fa-phone fa-lg"></i>
                         </label>
                       </div>
-                      <div className={`col-11 ${styles.textF}`}>
+                      <div className="col-11 textF">
                         <input
                           type="tel"
                           required
@@ -226,14 +221,14 @@ const RegisterScreen = ({ history }) => {
                       </div>
                     </div>
                   </div>
-                  <div className={`${styles.SignFRow} form-group`}>
+                  <div className="SignFRow form-group">
                     <div className="row align-items-center">
                       <div className="col-1 text-left">
                         <label htmlFor="password">
                           <i class="fas fa-database fa-lg"></i>
                         </label>
                       </div>
-                      <div className={`col-11 ${styles.textF}`}>
+                      <div className="col-11 textF">
                         <input
                           type="text"
                           required
@@ -268,7 +263,7 @@ const RegisterScreen = ({ history }) => {
                   Submit
                 </button>
                 
-                <div className={styles.register}>
+                <div className="register">
                   Already have an account? <Link to="/login">Login</Link>
                 </div>
               </div>

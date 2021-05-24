@@ -35,6 +35,45 @@ const UserSchema = new mongoose.Schema({
     type:String,
     required:[true, "Please provide DB name"]
   },
+  sales:{
+    type:Array,
+    default: [{
+      name:'Sunday',
+      sale:0
+    },
+    {
+      name:'Monday',
+      sale:0
+    },
+    {
+      name:'Tuesday',
+      sale:0
+    },
+    {
+      name:'Wednesday',
+      sale:0
+    },
+    {
+      name:'Thursday',
+      sale:0
+    }
+    ,{
+      name:'Friday',
+      sale:0
+    },
+    {
+      name:'Saturday',
+      sale:0
+    }]
+  },
+  prevWeekSales:{
+    type:Number,
+    default:0
+  },
+  setWeekReset:{
+    type:Boolean,
+    default:true
+  },
   resetPasswordToken: String,
   resetPasswordExpire: Date,
 });

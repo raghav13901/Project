@@ -1,5 +1,8 @@
-.userDetails .col-lg-1{
+.userDetails .col-1{
     text-align: center;
+  }
+  .userDetails .col-lg-1,.userDetails .col-lg-11{
+    font-size: 150%;
   }
   .userDetails.card-body .col-lg-2{
     font-size: 6rem;
@@ -98,6 +101,10 @@
     width: 100%;
     font-size: 125%;
   }
+  .bRow.enter button{
+    border-bottom-left-radius:16px !important;
+    border-bottom-right-radius:16px !important;
+  }
   .row .fc{
     padding-right: 0;
     border-radius: 0;
@@ -161,4 +168,62 @@
   .indexRow.card{
     box-shadow: none;
     border: none;
+  }
+  li{
+    text-transform: capitalize;
+  }
+  .home{
+    padding-bottom: 5%;
+    color: #084298;
+  }
+  .enterImg{
+    width: 110%;
+  }
+ 
+  @media (max-width:900px){
+    .card.rounded.containerL:last-child{
+      width: 200vw;
+    }
+    span > li{
+      width: 200vw;
+    }
+    .indexRow > .card-body{
+      padding: 30px;
+      font-size: 85%;
+    }
+    .indexRow > .card-body  .col-1{
+      padding: 0;
+    }
+    .userDetails .col-lg-1,.userDetails .col-lg-11{
+      font-size: 110%;
+    }
+    .col-md-6.col-lg-3{
+      margin:5% auto;
+      padding: 0;
+    }
+    .enterImg{
+      width: 90%;
+    }
+    .home .containerL{
+      width: 92%;
+      max-width: 100% !important;
+      margin: 15% 4%;
+      padding: 0;
+    }
+    .col-lg-10>.row{
+      margin:2% 0;
+    }
+    .col-lg-1.col-2 i{
+      font-size: 120%;
+    }
+  }
+  @media (max-width:400px){
+    .enterImg{
+      width: 130%;
+    }
+  }
+  @media (max-width:360px){
+    .enterImg{
+      width: 90%;
+    }
   }
