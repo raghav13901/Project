@@ -375,7 +375,7 @@ function Home({ match, history }) {
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">
-            Navbar
+            SupDB
           </a>
           <button
             class="navbar-toggler"
@@ -613,7 +613,23 @@ function Home({ match, history }) {
       </div>
       <h4 className="text-center"style={{marginBottom:"2%"}}>This Week Sales</h4>
       {showC()}
-      <div className="text-center">Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+      <div className="text-center"></div>
+      <footer className="footer text-center">
+          <div className="row align-items-center">
+              <div class="col-lg-6">
+                Made By : Raghav Khatoria  
+              </div>
+              <div class="col-lg-6">  
+                <div class="social-btns">
+                  <a class="btn insta" href="" target="_blank"><i class="fab fa-instagram fa"></i></a>
+                  <a class="btn linkedin" href="" target="_blank"><i class="fa fa-linkedin"></i></a>
+                </div>
+            </div>
+          </div>
+          <div className="text-center flaticon" >
+            Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+          </div>
+        </footer> 
     </div>
   );
 }
