@@ -2,8 +2,8 @@
 
 
 ## Tech Stack
-- Frontend: HTML/CSS/Bootstrap/Materialize/JS
-- Backend: NodeJS
+- Frontend: HTML/CSS/Bootstrap/ReactJS
+- Backend: NodeJS/MongoDB
 
 ## Quick Start
 
