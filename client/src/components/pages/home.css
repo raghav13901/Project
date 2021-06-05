@@ -36,12 +36,25 @@
   .userDetails h2{
     text-align: justify;
   }
-  .home .card-body{
+  .home .card-body,.modal-body,.modal-footer{
     background-color: #cadefd;
     text-align: justify;
     margin: 0;
     color: #084298;
     border-color: #cadefd;
+  }
+  .modal-body .enterImg{
+    width: 330%;
+  }
+  .modal-footer{
+    border-bottom-right-radius: 16px;
+    border-bottom-left-radius: 16px;
+  }
+  .modal-body label{
+    margin: 2% 5%;
+  }
+  .modal-body .row{
+    margin-bottom: 5%;
   }
   .userDetails{
     border-bottom-right-radius: 16px;
@@ -55,7 +68,11 @@
   .home .rounded{
       border-radius: 16px !important;
   }
-  .home .card-header{
+  .home .btn-close{
+    color: #fff;
+    background: none;
+  }
+  .home .card-header,.modal-header{
       background-color: #0d6efd;
       color: #fff;
       border-color: #0d6efd;
@@ -222,7 +239,7 @@
     margin-bottom: 8px;
   }
   .flaticon{
-    font-size: 75%;
+    font-size: 60%;
     color: #6F7275;
     margin: 4% auto 2%;
   }
@@ -303,7 +320,13 @@
     font-size: 38px;
     vertical-align: middle;
   }
- 
+  .col-2.text-center{
+  }
+  @media (max-width:1050px){
+    .enterImg{
+      width: 300%;
+    }
+  }
   @media (max-width:900px){
     .card.rounded.containerL:last-child{
       width: 200vw;
@@ -347,10 +370,24 @@
     .col-lg-1.col-2 i{
       font-size: 120%;
     }
+    .modal-body .enterImg{
+      width: 400%;
+    }
+  }
+  @media (max-width:600px){
+    .enterImg{
+      width: 48%;
+    }
   }
   @media (max-width: 500px){
     .footer .one{
         display: none;
+    }
+    .enterImg{
+      width: 100%;
+    }
+    .modal-body .enterImg{
+      width: 100%;
     }
   }
   @media (max-width:400px){
