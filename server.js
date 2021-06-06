@@ -29,9 +29,8 @@ app.use("/dashboard", require("./routes/dashboard"));
 // Error Handler Middleware
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 5000;
 
-const server = app.listen(PORT, () =>
+const server = app.listen(process.env.PORT || 5000, () =>
   console.log(`Sever running on port ${PORT}`)
 );
 
