@@ -1,5 +1,5 @@
 # SupDB
-
+It is a web-based application that allows the owner to store, edit and delete the items and displays sales in a graphical format.
 
 ## Tech Stack
 - Frontend: HTML/CSS/Bootstrap/ReactJS
