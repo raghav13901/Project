@@ -365,7 +365,7 @@ function Home({ match, history }) {
                         checked={DP} />
                     &nbsp;Discount Price
                   </label>
-                    <input type="number" name="DP" id="" placeholder="Enter Discount Price" onChange={(e) => setDisc(e.target.value)} disabled={!DP && !salesC} value={discP} />
+                    <input type="number" name="DP" id="" placeholder="Enter Discount Price" onChange={(e) => setDisc(e.target.value)} disabled={!DP} value={discP} />
                   </div>
                 </div>
                 <div class="modal-footer">
@@ -672,14 +672,16 @@ function Home({ match, history }) {
       {showC()}
       <div className="text-center"></div>
       <footer className="footer text-center">
-        <div className="row align-items-center">
+        <div className="text-center" style={{width:"100%"}}>Made By:</div>
+        <div className="row align-items-center text-center">
           <div class="col-lg-6">
-            Made By : Raghav Khatoria
+             Raghav Khatoria
               </div>
           <div class="col-lg-6">
             <div class="social-btns">
-              <a class="btn insta" href="https://www.instagram.com/raghavkhatoria/" target="_blank"><i class="fab fa-instagram fa"></i></a>
-              <a class="btn linkedin" href="https://www.linkedin.com/in/raghav-khatoria-b3053018b/" target="_blank"><i class="fa fa-linkedin"></i></a>
+              Amulya Ojha
+              {/* <a class="btn insta" href="https://www.instagram.com/raghavkhatoria/" target="_blank"><i class="fab fa-instagram fa"></i></a>
+              <a class="btn linkedin" href="https://www.linkedin.com/in/raghav-khatoria-b3053018b/" target="_blank"><i class="fa fa-linkedin"></i></a> */}
             </div>
           </div>
         </div>
